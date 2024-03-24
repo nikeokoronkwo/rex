@@ -1,7 +1,7 @@
-import { RexConfigFileOptions, RexSpecialFile } from "./RexConfig.ts";
-import { RexFile } from "./RexFile.ts";
+import { RexConfigFileOptions, RexSpecialConfig } from "./RexConfig.ts";
+import { RexFile, RexSpecialFile } from "./RexFile.ts";
 
-export class RexConfigFile extends RexFile implements RexSpecialFile {
+export class RexConfigFile extends RexSpecialFile {
   publishTo: string[] | undefined;
   publishChildrenTo: string[] | undefined;
   workflows: object | undefined;
@@ -52,17 +52,4 @@ export class RexConfigFile extends RexFile implements RexSpecialFile {
     return `${this.name}: ${this.stringify()}`;
   };
 
-  override createSync(directory?: string): void {
-    Deno
-      .createSync(`${directory ?? '.'}/${this.name}`)
-      .writeSync(new TextEncoder().encode(this.stringify()));
-  }
-
-  override async create(directory?: string): Promise<void> {
-    await Deno
-      .create(`${directory ?? '.'}/${this.name}`)
-      .then(
-        (file: Deno.FsFile) => file.writeSync(new TextEncoder().encode(this.stringify()))
-      );
-  }
 }

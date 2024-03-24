@@ -7,6 +7,6 @@ export interface RexConfigFileOptions {
   mainPackage?: object;
 }
 
-export interface RexSpecialFile {
+export interface RexSpecialConfig {
   stringify(): string;
 }

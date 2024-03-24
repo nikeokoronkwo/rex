@@ -2,8 +2,7 @@ import { walkSync, walk,WalkEntry } from "https://deno.land/std@0.219.1/fs/mod.t
 import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 import { globToRegExp } from "https://deno.land/std@0.220.1/path/glob_to_regexp.ts";
 
-import { RexPkgConfigFile } from "../../lib/files/RexPkgConfigFile.ts";
-import { RexConfigFile } from "../../lib/files/RexConfigFile.ts";
+import { RexPkgConfigFile, RexConfigFile, RexFile, RexSpecialConfig } from 'rex';
 
 export function addRexToProject(
   packages: string[], 
@@ -35,3 +34,12 @@ export function addRexToProject(
 
 }
 
+class RexImportMapFile extends RexFile implements RexSpecialConfig {
+  constructor(packageDirs?: string[]) {
+    super("rex_map.json", "");
+
+  }
+  stringify(): string {
+    throw new Error("Method not implemented.");
+  }
+}

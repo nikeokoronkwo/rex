@@ -1,7 +1,7 @@
 import { Command, EnumType } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
-import { addRexToProject } from "../exec/init/addRexToProject.ts";
-import { generateRexProject } from "../exec/init/generateRexProject.ts";
+import { addRexToProject } from "../lib/init/addRexToProject.ts";
+import { generateRexProject } from "../lib/init/generateRexProject.ts";
 
 const projectType = new EnumType(["none", "skeleton", "library", "web", "fresh", "react", "vue", "svelte"]);
 const envType = new EnumType(["npm", "deno", "jsr", "all", "none"]);
