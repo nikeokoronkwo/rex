@@ -1,0 +1,16 @@
+{
+  "name": "rex",
+  "version": "1.0.0",
+  "description": "Rex, a monolithic repository tool that can be used for deno, node and bun",
+  "main": "mod.ts",
+  "author": "NIMA",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "3.2.5"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
+}

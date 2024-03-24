@@ -1,0 +1,15 @@
+{
+  "name": "@rex/rex",
+  "version": "0.1.0",
+  "lint": {
+    "include": ["lib/"],
+    "exclude": ["node_modules/"]
+  },
+  "exports": "./mod.ts",
+  "tasks": {
+    "dev": "deno run main.ts",
+    "build": "deno run bin/main.ts",
+    "compile": "deno compile bin/main.ts",
+    "npm": "deno run -A scripts/npm.ts"
+  }
+}
