@@ -43,7 +43,6 @@ ${init.getHelp()}
 `)
 
 function initCommand(options: any, args: (string | undefined)[]): void {
-    console.log(options);
     if (options.box) {
         console.log(colors.red('Boxes are not supported yet'));
         Deno.exit(2);

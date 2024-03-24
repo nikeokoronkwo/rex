@@ -16,9 +16,7 @@ export function addRexToProject(
     publishTo: [...options.env],
   }).createSync(dir);
   if (packages) {
-    console.log(packages);
     const pathRegexes = packages.map(p => globToRegExp(p));
-    console.log(pathRegexes)
     for (const item of walkSync(dir, {
       includeFiles: false,
       includeSymlinks: false, 
@@ -30,6 +28,9 @@ export function addRexToProject(
         new RexPkgConfigFile(item.path).createSync();
       }
     }
+    new RexConfigFile({
+      publishTo: typeof options.env === 'string' ? [options.env] : [...options.env]
+    }).createSync()
   }
 
 }
