@@ -4,22 +4,22 @@ import { addRexToProject } from "../exec/init/addRexToProject.ts";
 import { generateRexProject } from "../exec/init/generateRexProject.ts";
 
 const projectType = new EnumType(["none", "skeleton", "library", "web", "fresh", "react", "vue", "svelte"]);
+const envType = new EnumType(["npm", "deno", "jsr", "all", "none"]);
 
 const init = new Command()
 .type('project-type', projectType)
+.type('env-type', envType)
 .description("Initialise a new mono repo in your project")
 .option('-t --template <temp:project-type>', 'set the template project type for your project')
-.option('--no-generate', 'Do not generate a new project', {
-    hidden: true,
+.option('-n --no-generate', 'Do not generate a new project - Add Rex to a new project', {
     conflicts: ['template']
 })
-.option('--packages <packages...:string>', 'Define packages to be used for the mono repo', {
+.option('-e --env <registry...:env-type>', 'Set the environments for/to publish the project. Use "all" to publish to all', {
+    default: "none"
+})
+.option('-p --packages <packages...:string>', 'Define packages to be used for the mono repo', {
     depends: ['no-generate'],
     collect: true,
-    value: (value: string[], previous: Array<string> = []): Array<string> => {
-        previous.concat(value);
-        return previous;
-    },
 })
 .option('-b, --box <box:string>', 'Use template from the given box url (not supported yet)', {
     hidden: true,
@@ -43,14 +43,16 @@ ${init.getHelp()}
 `)
 
 function initCommand(options: any, args: (string | undefined)[]): void {
+    console.log(options);
     if (options.box) {
         console.log(colors.red('Boxes are not supported yet'));
         Deno.exit(2);
     }
-    if (options.generate) {
-        generateRexProject(options.template, args[0], args[1]);
+    const packages = options.packages.reduce();
+    if (!options.noGenerate) {
+        generateRexProject(options.template, args[0], args[1], options);
     } else {
-        addRexToProject(options.packages ,args[0], args[1]);
+        addRexToProject(packages ,args[0], args[1], options);
     }
     Deno.exit(0);
 }
