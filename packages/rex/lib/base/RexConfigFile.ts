@@ -28,7 +28,7 @@ export class RexConfigFile extends RexSpecialFile {
         workflows: jsonObject.workflows,
         repository: jsonObject.repository,
         plugins: jsonObject.plugins,
-        mainPackage: jsonObject.mainPackage
+        mainPackage: jsonObject.mainPackage,
       });
     } catch (err) {
       console.error(`Error parsing 'rex.json' file: ${err}`);
@@ -44,12 +44,11 @@ export class RexConfigFile extends RexSpecialFile {
       mainPackage: this.mainPackage,
       workflows: this.workflows,
       repository: this.repository,
-      plugins: this.plugins
+      plugins: this.plugins,
     });
   }
 
   public override toString = (): string => {
     return `${this.name}: ${this.stringify()}`;
   };
-
 }

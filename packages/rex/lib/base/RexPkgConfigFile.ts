@@ -1,5 +1,5 @@
-import { RexFile } from './RexFile.ts';
-import { RexSpecialConfig } from './RexConfig.ts';
+import { RexFile } from "./RexFile.ts";
+import { RexSpecialConfig } from "./RexConfig.ts";
 import { RexSpecialFile } from "./RexFile.ts";
 
 export class RexPkgConfigFile extends RexSpecialFile {
@@ -24,5 +24,4 @@ export class RexPkgConfigFile extends RexSpecialFile {
   public override toString = (): string => {
     return `${this.name}: ${this.stringify()}`;
   };
-
 }

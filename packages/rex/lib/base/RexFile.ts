@@ -1,25 +1,23 @@
-import { RexSpecialConfig } from './RexConfig.ts'
+import { RexSpecialConfig } from "./RexConfig.ts";
 
 export class RexFile {
   createSync(directory?: string): void {
-    Deno
-      .createSync(`${directory ?? '.'}/${this.name}`)
-      .writeSync(new TextEncoder().encode(this.contents ?? ''));
+    Deno.createSync(`${directory ?? "."}/${this.name}`).writeSync(
+      new TextEncoder().encode(this.contents ?? ""),
+    );
   }
 
   async create(directory?: string): Promise<void> {
-    await Deno
-      .create(`${directory ?? '.'}/${this.name}`)
-      .then((file: Deno.FsFile) => file.writeSync(new TextEncoder().encode(this.contents)));
+    await Deno.create(`${directory ?? "."}/${this.name}`).then(
+      (file: Deno.FsFile) =>
+        file.writeSync(new TextEncoder().encode(this.contents)),
+    );
   }
 
   name: string;
   contents: string | undefined;
 
-  constructor(
-    name: string,
-    contents?: string
-  ) {
+  constructor(name: string, contents?: string) {
     this.name = name;
     this.contents = contents;
   }
@@ -34,14 +32,13 @@ export class RexFile {
   };
 }
 
-export class RexSpecialFile extends RexFile implements RexSpecialConfig {
-  stringify(): string {
-    throw new Error("Method not implemented.");
-  }
+export abstract class RexSpecialFile
+  extends RexFile
+  implements RexSpecialConfig
+{
+  abstract stringify(): string;
 
-  constructor(
-    name: string,
-  ) {
+  constructor(name: string) {
     super(name, "");
   }
 
@@ -50,16 +47,15 @@ export class RexSpecialFile extends RexFile implements RexSpecialConfig {
   };
 
   override createSync(directory?: string): void {
-    Deno
-      .createSync(`${directory ?? '.'}/${this.name}`)
-      .writeSync(new TextEncoder().encode(this.stringify()));
+    Deno.createSync(`${directory ?? "."}/${this.name}`).writeSync(
+      new TextEncoder().encode(this.stringify()),
+    );
   }
 
   override async create(directory?: string): Promise<void> {
-    await Deno
-      .create(`${directory ?? '.'}/${this.name}`)
-      .then(
-        (file: Deno.FsFile) => file.writeSync(new TextEncoder().encode(this.stringify()))
-      );
+    await Deno.create(`${directory ?? "."}/${this.name}`).then(
+      (file: Deno.FsFile) =>
+        file.writeSync(new TextEncoder().encode(this.stringify())),
+    );
   }
 }
