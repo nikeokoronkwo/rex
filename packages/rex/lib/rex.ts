@@ -6,3 +6,4 @@ export type {
 } from "./base/RexConfig.ts";
 export { RexPkgConfigFile } from "./base/RexPkgConfigFile.ts";
 export { RexImportMapFile } from "./base/RexImportMapFile.ts";
+export { RexJSRFile, RexDenoFile } from "./base/RexEnvFiles.ts";
