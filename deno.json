@@ -11,5 +11,9 @@
     "build": "deno run bin/main.ts",
     "compile": "deno compile bin/main.ts",
     "npm": "deno run -A scripts/npm.ts"
+  },
+  "imports": {
+    "rex-cli/": "./packages/rex-cli/",
+    "rex": "./packages/rex/mod.ts"
   }
 }
