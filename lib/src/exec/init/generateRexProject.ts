@@ -1,3 +1,21 @@
-export function generateRexProject(template: string, directory: string | undefined, name: string | undefined) {
-  throw new Error("Function not implemented.");
+import { RexConfigFile } from "../../lib/files/RexConfigFile.ts";
+import { RexFile } from "../../lib/files/RexFile.ts";
+
+export function generateRexProject(
+  template: string, 
+  directory: string | undefined, 
+  name: string | undefined, 
+  options: any
+) {
+  const dir = directory ?? ".";
+  const mainFiles: RexFile[] = [
+    new RexFile("README.md"),
+    new RexFile("CHANGELOG.md").addCode(`# Changelog for ${name}\n\n##1.0.0\n- Initial Version`),
+    new RexFile("LICENSE").addCode(``),
+  ];
+  mainFiles.forEach(file => file.createSync(dir));
+  new RexConfigFile({
+    publishTo: options.env,
+  }).createSync(dir);
 }
+

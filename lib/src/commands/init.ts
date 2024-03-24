@@ -48,7 +48,10 @@ function initCommand(options: any, args: (string | undefined)[]): void {
         console.log(colors.red('Boxes are not supported yet'));
         Deno.exit(2);
     }
-    const packages = options.packages.reduce();
+    const packages = options.packages.reduce(
+        (acc: string[], current: string[]) => acc.concat(current),
+        []
+    );
     if (!options.noGenerate) {
         generateRexProject(options.template, args[0], args[1], options);
     } else {
