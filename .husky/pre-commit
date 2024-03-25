@@ -1,2 +1,3 @@
+yarn prettier --no-config -w . --ignore-path .gitignore
 yarn test
 deno test
