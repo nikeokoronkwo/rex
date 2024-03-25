@@ -1,5 +1,5 @@
 import { Command, EnumType } from "https://deno.land/x/cliffy/command/mod.ts";
-import { init, help } from "./commands/commands.ts";
+import { init, help, list } from "./commands/commands.ts";
 
 const logLevel = new EnumType(["debug", "info", "warn", "error"]);
 
@@ -13,7 +13,7 @@ const cli = new Command()
   .command("check")
   .command("readme")
   .command("ci")
-  .command("list")
+  .command("list", list)
   .command("global")
   .command("build")
   .command("publish")
