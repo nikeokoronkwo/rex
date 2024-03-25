@@ -2,11 +2,13 @@ import { RexSpecialFile } from "rex";
 
 export class RexDenoFile extends RexSpecialFile {
   denoFile: object | undefined;
+  dir: string;
 
   // TODO: Implement object-specifics in class implementation
-  constructor(denoFile?: object) {
+  constructor(denoFile?: object, dir: string = ".") {
     super("deno.json");
     this.denoFile = denoFile;
+    this.dir = dir;
   }
 
   stringify(): string {
@@ -21,13 +23,13 @@ export class RexDenoFile extends RexSpecialFile {
     return this;
   }
 
-  public static parse(contents: string) {
+  public static parse(contents: string, dir: string = '.') {
     try {
       const jsonObject = JSON.parse(contents);
-      return new RexDenoFile(jsonObject);
+      return new RexDenoFile(jsonObject, dir);
     } catch (err) {
       console.error(`Error parsing 'deno.json' file: ${err}`);
-      return new RexDenoFile();
+      return new RexDenoFile(undefined, dir);
     }
   }
 }
