@@ -11,6 +11,7 @@
     "prettier": "3.2.5"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "deno test"
   }
 }

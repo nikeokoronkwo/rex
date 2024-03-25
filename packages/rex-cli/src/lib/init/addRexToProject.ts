@@ -10,8 +10,8 @@ import {
   RexConfigFile,
   RexSpecialFile,
   RexImportMapFile,
-  RexJSRFile, 
-  RexDenoFile
+  RexJSRFile,
+  RexDenoFile,
 } from "rex";
 
 export function addRexToProject(
@@ -49,8 +49,6 @@ export function addRexToProject(
     }).createSync();
   }
 }
-
-
 
 function createEnvFiles(env: string) {
   switch (env) {

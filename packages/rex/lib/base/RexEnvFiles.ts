@@ -23,7 +23,7 @@ export class RexDenoFile extends RexSpecialFile {
     return this;
   }
 
-  public static parse(contents: string, dir: string = '.') {
+  public static parse(contents: string, dir: string = ".") {
     try {
       const jsonObject = JSON.parse(contents);
       return new RexDenoFile(jsonObject, dir);
