@@ -1,6 +1,6 @@
 {
   "name": "@rex/rex-cli",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "exports": {
     "./lib": "./mod.ts",
     "./cli": "./main.ts"
