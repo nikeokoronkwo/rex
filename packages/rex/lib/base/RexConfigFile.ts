@@ -5,9 +5,10 @@ export class RexConfigFile extends RexSpecialFile {
   publishTo: string[] | undefined;
   publishChildrenTo: string[] | undefined;
   workflows: object | undefined;
-  repository: object | undefined;
+  repository: object | string | undefined;
   plugins: object[] | undefined;
   mainPackage: object | undefined;
+  rexActions: object | undefined;
 
   constructor(options?: RexConfigFileOptions) {
     super("rex.json");

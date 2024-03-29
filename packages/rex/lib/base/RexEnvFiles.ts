@@ -1,4 +1,4 @@
-import { RexSpecialFile } from "rex";
+import { RexSpecialFile } from "./RexFile.ts";
 
 export class RexDenoFile extends RexSpecialFile {
   denoFile: object | undefined;
