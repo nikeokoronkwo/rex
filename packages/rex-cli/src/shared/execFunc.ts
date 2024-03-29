@@ -2,10 +2,10 @@ import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
 import { walk, walkSync } from "https://deno.land/std@0.219.1/fs/walk.ts";
 import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 
-export async function execOnRexPackages(
+export function execOnRexPackages(
   closure: (name: string, path: string) => void,
 ) {
-  for await (const dir of walk(".", {
+  for (const dir of walkSync(".", {
     includeFiles: false,
     includeSymlinks: false,
     includeDirs: true,

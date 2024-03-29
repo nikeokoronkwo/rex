@@ -51,7 +51,7 @@ async function runCommand(options: any, args: string[]) {
     }
     let cmdToRun = [command, ...args];
 
-    await execOnRexPackages(async (name, path) => {
+    execOnRexPackages(async (name, path) => {
       let { failures, successes } = await runonpkgs(
         command,
         path,

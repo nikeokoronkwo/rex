@@ -9,12 +9,12 @@ const list = new Command()
     "-c --category <category:string>",
     "List packages based on the criteria of <category>",
   )
-  .action(async (options, ...args) => {
-    await listCommand(options);
+  .action((options, ...args) => {
+    listCommand(options);
   });
 
 export default list;
 
-async function listCommand(options: any) {
-  await execOnRexPackages(listname);
+function listCommand(options: any) {
+  execOnRexPackages(listname);
 }
