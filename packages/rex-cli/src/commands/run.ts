@@ -3,7 +3,7 @@ import {
   execOnRexPackages,
   execOnRexPackagesAndReturn,
 } from "../shared/execFunc.ts";
-import { runonpkgs } from "../lib/run/runonpkgs.ts";
+import { runonpkgs } from "../shared/runonpkgs.ts";
 import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
 
 const run = new Command()

@@ -1,7 +1,7 @@
 import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
 import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 import { RexError } from "rex";
-import { runProcess } from "./runProcess.ts";
+import { runProcess } from "../lib/run/runProcess.ts";
 
 export async function runonpkgs(
   command: string,

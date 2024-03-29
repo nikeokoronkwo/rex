@@ -3,6 +3,10 @@ import {
   EnumType,
 } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 import { envType } from "../shared/env.ts";
+import { execOnRexPackages } from "../shared/execFunc.ts";
+import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
+import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
+import { runonpkgs } from "../shared/runonpkgs.ts";
 
 const publishType = new EnumType(["children", "main"]);
 
@@ -34,5 +38,80 @@ By default cli arguments override.
     "--no-config",
     "Do not use 'rex_pkg.json' when configuring publishing pipeline",
   )
-  .arguments("<type:pub-type>");
+  .arguments("<type:pub-type>")
+  .action((options, args) => {
+    publishCommand(options, args);
+  });
 export default publish;
+
+function publishCommand(
+  options: {
+    dryRun?: true | undefined;
+    ignore?: ("npm" | "deno" | "jsr" | "all" | "none")[] | undefined;
+    bundle?: true | string[] | undefined;
+    tscCompile?: true | undefined;
+    config: boolean;
+  },
+  args: "children" | "main",
+) {
+  if (args === "children") {
+    execOnRexPackages((name, path) => {
+      let envs = getRexPkgEnvs(path);
+      let fails = 0;
+      let passes = 0;
+      envs.forEach(async (env) => {
+        let { failures, successes } = await runonpkgs(
+          env.name,
+          path,
+          name,
+          fails,
+          [env.name == "npm" ? "npm" : "deno", "publish"],
+          passes,
+        );
+        fails = failures;
+        passes = successes;
+      });
+    });
+  } else {
+    console.log("Publishing the main monorepo is not supported yet");
+  }
+}
+
+type envFile = {
+  name: string;
+  pkgName?: string;
+  configPath: string;
+};
+
+function getRexPkgEnvs(path: string): envFile[] {
+  let names: envFile[] = [];
+  let envExists = false;
+  if (existsSync(`${path}${SEPARATOR}deno.json`)) {
+    names.push({
+      name: "deno",
+      configPath: `${path}${SEPARATOR}deno.json`,
+    });
+    envExists = true;
+  }
+  if (existsSync(`${path}${SEPARATOR}jsr.json`)) {
+    names.push({
+      name: "jsr",
+      configPath: `${path}${SEPARATOR}jsr.json`,
+    });
+    envExists = true;
+  }
+  if (existsSync(`${path}${SEPARATOR}package.json`)) {
+    names.push({
+      name: "npm",
+      configPath: `${path}${SEPARATOR}package.json`,
+    });
+    envExists = true;
+  }
+  if (!envExists) {
+    names.push({
+      name: "unknown",
+      configPath: `${path}${SEPARATOR}rex_pkg.json`,
+    });
+  }
+  return names;
+}

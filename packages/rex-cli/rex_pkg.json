@@ -1,5 +1,12 @@
 {
-  "publish": {},
+  "publish": {
+    "pre-action": [
+      {
+        "name": "npm-check",
+        "action": ""
+      }
+    ]
+  },
   "ci": {},
   "ignoreCommands": false
 }

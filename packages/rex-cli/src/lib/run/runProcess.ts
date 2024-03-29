@@ -23,13 +23,13 @@ export async function runProcess(
   ]);
   if (status.success) {
     console.log(
-      `${colors.green("Success")}: Process suceeded at ${name} \n${stdout}`,
+      `${colors.green("Success")}: Process suceeded at ${name} \n${new TextDecoder().decode(stdout)}`,
     );
   } else {
     console.log(
       `${colors.red(
         "Failed",
-      )}: Process exited with exit code ${status.code}: \n${stderr}`,
+      )}: Process exited with exit code ${status.code}: \n${new TextDecoder().decode(stderr)}`,
     );
   }
   process.close();
