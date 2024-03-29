@@ -4,3 +4,4 @@ demo.ts
 deno.lock
 deno.lock
 deno.lock
+**/deno.lock

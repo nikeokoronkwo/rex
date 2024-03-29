@@ -1,5 +1,5 @@
 {
-  "name": "@rex/rex",
+  "name": "@rex/rex-workspace",
   "version": "0.1.0",
   "lint": {
     "include": ["lib/"],
