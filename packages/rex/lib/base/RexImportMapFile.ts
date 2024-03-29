@@ -1,5 +1,5 @@
-import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
-import { RexSpecialFile } from "rex";
+import { SEPARATOR } from "../../deps.ts";
+import { RexSpecialFile } from "./RexFile.ts";
 
 export class RexImportMapFile extends RexSpecialFile {
   packages: string[];
