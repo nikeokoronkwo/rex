@@ -1,4 +1,10 @@
 {
+  "name": "@rex/rex-cli",
+  "version": "0.1.0",
+  "exports": {
+    "./lib": "./mod.ts",
+    "./cli": "./main.ts"
+  },
   "tasks": {
     "dev": "deno run --watch main.ts"
   },

@@ -5,6 +5,7 @@ import {
 import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
 import { addRexToProject } from "../lib/init/addRexToProject.ts";
 import { generateRexProject } from "../lib/init/generateRexProject.ts";
+import { envType } from "../shared/env.ts";
 
 const projectType = new EnumType([
   "none",
@@ -16,8 +17,6 @@ const projectType = new EnumType([
   "vue",
   "svelte",
 ]);
-const envType = new EnumType(["npm", "deno", "jsr", "all", "none"]);
-
 const init = new Command()
   .type("project-type", projectType)
   .type("env-type", envType)
