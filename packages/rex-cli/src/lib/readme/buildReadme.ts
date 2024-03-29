@@ -12,10 +12,18 @@ export function buildReadme(readmeObj: RexPkgMDInterface[][]) {
   });
   return output;
 }
-export function getReadmeInfo(path: string, pkgname: string, name: string, pkgversion: string, pkgpubversion: string, pkgdescs: RexPkgMDInterface[], readmeObj: RexPkgMDInterface[][]) {
+export function getReadmeInfo(
+  path: string,
+  pkgname: string,
+  name: string,
+  pkgversion: string,
+  pkgpubversion: string,
+  pkgdescs: RexPkgMDInterface[],
+  readmeObj: RexPkgMDInterface[][],
+) {
   if (existsSync(`${path}${SEPARATOR}deno.json`)) {
     const newLocal = JSON.parse(
-      Deno.readTextFileSync(`${path}${SEPARATOR}deno.json`)
+      Deno.readTextFileSync(`${path}${SEPARATOR}deno.json`),
     );
     pkgname = newLocal.name ?? name;
     pkgversion = newLocal.version ?? "unknown";
@@ -29,7 +37,7 @@ export function getReadmeInfo(path: string, pkgname: string, name: string, pkgve
   }
   if (existsSync(`${path}${SEPARATOR}jsr.json`)) {
     const newLocal = JSON.parse(
-      Deno.readTextFileSync(`${path}${SEPARATOR}jsr.json`)
+      Deno.readTextFileSync(`${path}${SEPARATOR}jsr.json`),
     );
     pkgname = newLocal.name ?? name;
     pkgversion = newLocal.version ?? "unknown";
@@ -43,7 +51,7 @@ export function getReadmeInfo(path: string, pkgname: string, name: string, pkgve
   }
   if (existsSync(`${path}${SEPARATOR}package.json`)) {
     const newLocal = JSON.parse(
-      Deno.readTextFileSync(`${path}${SEPARATOR}package.json`)
+      Deno.readTextFileSync(`${path}${SEPARATOR}package.json`),
     );
     pkgname = newLocal.name ?? name;
     pkgversion = newLocal.version ?? "unknown";
@@ -54,9 +62,11 @@ export function getReadmeInfo(path: string, pkgname: string, name: string, pkgve
       reg: "npm",
     });
   }
-  if (!existsSync(`${path}${SEPARATOR}package.json`) &&
+  if (
+    !existsSync(`${path}${SEPARATOR}package.json`) &&
     !existsSync(`${path}${SEPARATOR}jsr.json`) &&
-    !existsSync(`${path}${SEPARATOR}deno.json`)) {
+    !existsSync(`${path}${SEPARATOR}deno.json`)
+  ) {
     pkgname = name;
     pkgversion = "unknown";
     pkgpubversion = "unknown";

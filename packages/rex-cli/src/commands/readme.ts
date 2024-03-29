@@ -36,9 +36,16 @@ function readmeCommand() {
     let pkgname: string = "";
     let pkgversion: string = "";
     let pkgpubversion: string = "";
-    ({ pkgname, pkgversion, pkgpubversion } = getReadmeInfo(path, pkgname, name, pkgversion, pkgpubversion, pkgdescs, readmeObj));
+    ({ pkgname, pkgversion, pkgpubversion } = getReadmeInfo(
+      path,
+      pkgname,
+      name,
+      pkgversion,
+      pkgpubversion,
+      pkgdescs,
+      readmeObj,
+    ));
   });
   let output = buildReadme(readmeObj);
   console.log(output);
 }
-
