@@ -7,10 +7,11 @@
   },
   "exports": "./mod.ts",
   "tasks": {
-    "dev": "deno run main.ts",
-    "build": "deno run bin/main.ts",
+    "dev": "deno run -A main.ts",
+    "build": "deno run -A packages/rex/main.ts",
     "compile": "deno compile bin/main.ts",
-    "npm": "deno run -A scripts/npm.ts"
+    "npm": "deno run -A scripts/npm.ts",
+    "prepare": "husky"
   },
   "imports": {
     "rex-cli/": "./packages/rex-cli/",

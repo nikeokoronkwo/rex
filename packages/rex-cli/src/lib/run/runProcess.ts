@@ -6,9 +6,9 @@ export async function runProcess(
   cmdToRun: string[],
 ) {
   console.log(
-    `Running "${cmdToRun.join(" ")}" in ${colors.blue(name)} at ${
-      colors.italic(path)
-    }\n`,
+    `Running "${cmdToRun.join(" ")}" in ${colors.blue(name)} at ${colors.italic(
+      path,
+    )}\n`,
   );
   const process = Deno.run({
     cmd: cmdToRun,
@@ -27,9 +27,9 @@ export async function runProcess(
     );
   } else {
     console.log(
-      `${
-        colors.red("Failed")
-      }: Process exited with exit code ${status.code}: \n${stderr}`,
+      `${colors.red(
+        "Failed",
+      )}: Process exited with exit code ${status.code}: \n${stderr}`,
     );
   }
   process.close();

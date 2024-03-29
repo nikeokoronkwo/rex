@@ -1,17 +1,17 @@
 import {
-  walkSync,
   walk,
   WalkEntry,
+  walkSync,
 } from "https://deno.land/std@0.219.1/fs/mod.ts";
 import { globToRegExp } from "https://deno.land/std@0.220.1/path/glob_to_regexp.ts";
 
 import {
-  RexPkgConfigFile,
   RexConfigFile,
-  RexSpecialFile,
+  RexDenoFile,
   RexImportMapFile,
   RexJSRFile,
-  RexDenoFile,
+  RexPkgConfigFile,
+  RexSpecialFile,
 } from "rex";
 
 export function addRexToProject(

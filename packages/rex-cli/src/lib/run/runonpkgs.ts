@@ -14,8 +14,9 @@ export async function runonpkgs(
   switch (command) {
     case "npm":
       if (!existsSync(`${path}${SEPARATOR}package.json`)) {
-        new RexError(`'package.json' doesn't exist for package ${name}`)
-          .print();
+        new RexError(
+          `'package.json' doesn't exist for package ${name}`,
+        ).print();
         failures++;
       } else {
         await runProcess(name, path, cmdToRun);

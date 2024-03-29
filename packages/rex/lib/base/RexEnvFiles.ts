@@ -16,10 +16,11 @@ export class RexDenoFile extends RexSpecialFile {
   }
 
   addImportPath(importPath: string) {
-    if (this.denoFile)
+    if (this.denoFile) {
       Object.assign(this.denoFile, {
         importPath: importPath,
       });
+    }
     return this;
   }
 
@@ -48,10 +49,11 @@ export class RexJSRFile extends RexSpecialFile {
   }
 
   addImportPath(importPath: string) {
-    if (this.jsrFile)
+    if (this.jsrFile) {
       Object.assign(this.jsrFile, {
         importPath: importPath,
       });
+    }
     return this;
   }
 

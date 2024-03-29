@@ -5,13 +5,11 @@ import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 export async function execOnRexPackages(
   closure: (name: string, path: string) => void,
 ) {
-  for await (
-    const dir of walk(".", {
-      includeFiles: false,
-      includeSymlinks: false,
-      includeDirs: true,
-    })
-  ) {
+  for await (const dir of walk(".", {
+    includeFiles: false,
+    includeSymlinks: false,
+    includeDirs: true,
+  })) {
     if (existsSync(`${dir.path}${SEPARATOR}rex_pkg.json`)) {
       closure(dir.name, dir.path);
     }
@@ -28,13 +26,11 @@ export function execOnRexPackagesAndReturn<T>(
   check?: (out: T) => boolean,
 ): T[] {
   let output: T[] = [];
-  for (
-    const dir of walkSync(".", {
-      includeFiles: false,
-      includeSymlinks: false,
-      includeDirs: true,
-    })
-  ) {
+  for (const dir of walkSync(".", {
+    includeFiles: false,
+    includeSymlinks: false,
+    includeDirs: true,
+  })) {
     if (existsSync(`${dir.path}${SEPARATOR}rex_pkg.json`)) {
       let caseOut = closure(dir.name, dir.path);
       if (check) {
