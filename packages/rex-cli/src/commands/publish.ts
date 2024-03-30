@@ -1,11 +1,11 @@
 import {
   Command,
-  EnumType,
-} from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
+  EnumType, 
+  SEPARATOR, 
+  existsSync
+} from "../../deps.ts";
 import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
-import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
-import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
 import { RexDenoFile } from "rex";
 
@@ -87,7 +87,9 @@ type envFile = {
 
 function resolveImports(env: envFile, path: string, config?: any) {
   if (env.name == "deno") {
-    let denoFile = RexDenoFile.parse(Deno.readTextFileSync(`${path}${SEPARATOR}deno.json`));
+    let denoFile = RexDenoFile.parse(
+      Deno.readTextFileSync(`${path}${SEPARATOR}deno.json`),
+    );
     let imports = denoFile.denoFile?.imports;
     for (const key of Object.keys(imports)) {
     }

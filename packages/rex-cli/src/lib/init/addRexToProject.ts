@@ -1,9 +1,9 @@
 import {
   walk,
   WalkEntry,
-  walkSync,
-} from "https://deno.land/std@0.219.1/fs/mod.ts";
-import { globToRegExp } from "https://deno.land/std@0.220.1/path/glob_to_regexp.ts";
+  walkSync, 
+  globToRegExp
+} from "../../../deps.ts";
 
 import {
   RexConfigFile,

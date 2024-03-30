@@ -1,5 +1,4 @@
-import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
-import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
+import { existsSync, SEPARATOR } from "../../deps.ts";
 import { RexError } from "rex";
 import { runProcess } from "../lib/run/runProcess.ts";
 

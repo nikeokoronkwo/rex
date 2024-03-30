@@ -1,6 +1,4 @@
-import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
-import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
-import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
+import { existsSync, SEPARATOR, colors } from "../../../deps.ts";
 
 export function listname(name: string, path: string) {
   let pkgname: string = "";
