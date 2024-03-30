@@ -1,6 +1,4 @@
-import {
-  Command,
-} from "../../deps.ts";
+import { Command } from "../../deps.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
 import { getReadmeInfo, buildReadme } from "../lib/readme/buildReadme.ts";
 

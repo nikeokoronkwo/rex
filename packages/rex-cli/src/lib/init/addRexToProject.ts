@@ -1,9 +1,4 @@
-import {
-  walk,
-  WalkEntry,
-  walkSync, 
-  globToRegExp
-} from "../../../deps.ts";
+import { walk, WalkEntry, walkSync, globToRegExp } from "../../../deps.ts";
 
 import {
   RexConfigFile,

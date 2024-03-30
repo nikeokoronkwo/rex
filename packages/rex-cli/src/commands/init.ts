@@ -1,8 +1,4 @@
-import {
-  Command,
-  EnumType,
-  colors
-} from "../../deps.ts";
+import { Command, EnumType, colors } from "../../deps.ts";
 import { addRexToProject } from "../lib/init/addRexToProject.ts";
 import { generateRexProject } from "../lib/init/generateRexProject.ts";
 import { envType } from "../shared/env.ts";

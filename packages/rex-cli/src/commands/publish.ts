@@ -1,9 +1,4 @@
-import {
-  Command,
-  EnumType, 
-  SEPARATOR, 
-  existsSync
-} from "../../deps.ts";
+import { Command, EnumType, SEPARATOR, existsSync } from "../../deps.ts";
 import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
