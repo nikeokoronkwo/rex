@@ -7,6 +7,7 @@ import { execOnRexPackages } from "../shared/execFunc.ts";
 import { existsSync } from "https://deno.land/std@0.219.1/fs/mod.ts";
 import { SEPARATOR } from "https://deno.land/std@0.219.1/path/constants.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
+import { RexDenoFile } from "rex";
 
 const publishType = new EnumType(["children", "main"]);
 
@@ -60,6 +61,7 @@ function publishCommand(
       let fails = 0;
       let passes = 0;
       envs.forEach(async (env) => {
+        resolveImports(env, path);
         let { failures, successes } = await runonpkgs(
           env.name,
           path,
@@ -82,6 +84,15 @@ type envFile = {
   pkgName?: string;
   configPath: string;
 };
+
+function resolveImports(env: envFile, path: string, config?: any) {
+  if (env.name == "deno") {
+    let denoFile = RexDenoFile.parse(Deno.readTextFileSync(`${path}${SEPARATOR}deno.json`));
+    let imports = denoFile.denoFile?.imports;
+    for (const key of Object.keys(imports)) {
+    }
+  }
+}
 
 function getRexPkgEnvs(path: string): envFile[] {
   let names: envFile[] = [];

@@ -9,4 +9,4 @@ Whatever the case, Rex has got you covered.
 
 ## License
 
-MIT License (./LICENSE)
+[MIT License](./LICENSE)

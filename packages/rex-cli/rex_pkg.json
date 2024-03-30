@@ -1,11 +1,14 @@
 {
   "publish": {
-    "pre-action": [
+    "preAction": [
       {
         "name": "npm-check",
         "action": ""
       }
-    ]
+    ],
+    "resolveImports": {
+      "rex": "rexjs"
+    }
   },
   "ci": {},
   "ignoreCommands": false

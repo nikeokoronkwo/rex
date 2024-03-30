@@ -6,6 +6,7 @@ import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
 import { addRexToProject } from "../lib/init/addRexToProject.ts";
 import { generateRexProject } from "../lib/init/generateRexProject.ts";
 import { envType } from "../shared/env.ts";
+import { RexError } from "rex";
 
 const projectType = new EnumType([
   "none",
@@ -73,14 +74,15 @@ ${init.getHelp()}
 `);
 
 function initCommand(options: any, args: (string | undefined)[]): void {
+  handleOptions(options, args);
   if (options.box) {
     console.log(colors.red("Boxes are not supported yet"));
     Deno.exit(2);
   }
-  const packages = options.packages.reduce(
+  const packages = options.packages ? options.packages.reduce(
     (acc: string[], current: string[]) => acc.concat(current),
     [],
-  );
+  ) : [];
   if (!options.noGenerate) {
     generateRexProject(options.template, args[0], args[1], options);
   } else {
@@ -90,3 +92,9 @@ function initCommand(options: any, args: (string | undefined)[]): void {
 }
 
 export default init;
+
+function handleOptions(options: any, args: (string | undefined)[]) {
+  if (!options.packages && !options.noGenerate) {
+    new RexError("Provide a definite option choice to get started").print().exit()
+  }
+}

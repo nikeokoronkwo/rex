@@ -1,7 +1,7 @@
 import { RexSpecialFile } from "./RexFile.ts";
 
 export class RexDenoFile extends RexSpecialFile {
-  denoFile: object | undefined;
+  denoFile: any;
   dir: string;
 
   // TODO: Implement object-specifics in class implementation
