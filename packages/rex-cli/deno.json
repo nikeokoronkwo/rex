@@ -9,6 +9,6 @@
     "dev": "deno run --watch main.ts"
   },
   "imports": {
-    "rex": "../rex/mod.ts"
+    "rex": "https://deno.land/x/rexjs"
   }
 }
