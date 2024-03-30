@@ -13,8 +13,5 @@
     "npm": "deno run -A scripts/npm.ts",
     "prepare": "husky"
   },
-  "imports": {
-    "rex-cli/": "./packages/rex-cli/",
-    "rex": "./packages/rex/mod.ts"
-  }
+  "importMap": "./.rexmap.json"
 }
