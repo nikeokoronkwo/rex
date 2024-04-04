@@ -78,7 +78,6 @@ type envFile = {
   configPath: string;
 };
 
-
 function getRexPkgEnvs(path: string): envFile[] {
   let names: envFile[] = [];
   let envExists = false;
