@@ -1,3 +1,99 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "title": "JSON Schema for Rex Configuration",
+  "description": "This details out the rex.json schema",
+  "type":"object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema used for the json object"
+    },
+    "publishTo": {
+      "type": "array",
+      "description": "Where to publish to",
+      "oneOf":[
+        {
+          "type": "string",
+          "description": "Default Supported Platforms"
+        }
+      ]
+    },
+    "publishChildrenTo": {},
+    "workflows": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "github": {
+
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "The github url of the repository"
+        },
+        {
+          "type": "object",
+          "description": "Description about the repository used",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The url of the repository"
+            },
+            "branch": {
+              "type": "string",
+              "description": "The branch of the repository being used"
+            },
+            "base": {
+              "type": "string",
+              "description": "The base reference of the project"
+            }
+          },
+          "required": ["url"]
+        }
+      ]
+    },
+    "plugins": {
+      "type": "array",
+      "description": "Plugins to use for your Rex Application (todo)"
+    },
+    "main": {
+      "type": "object",
+      "description": "Operations to apply on the global monorepo",
+      "properties": {
+        "env": {
+          "type": "object",
+          "description": "Environment Variables"
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "description": "Actions to run for certain tasks in the monorepo",
+      "properties": {
+        "publish": {
+          "type": "object",
+          "description": "Describe Actions to run before publishing",
+          "properties": {
+            "script": {
+              "type": "string",
+              "description": "String script to run before publishing"
+            }
+          }
+        },
+        "serve": {
+          "type": "object",
+          "description": "Describe actions to run before app serving"
+        },
+        "build": {
+          "type": "object",
+          "description": "Describe actions to run before building application"
+        }
+      }
+    }
+  }
 }
