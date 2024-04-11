@@ -1,8 +1,8 @@
 {
-  "$schema":"http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "JSON Schema for Rex Configuration",
   "description": "This details out the rex.json schema",
-  "type":"object",
+  "type": "object",
   "additionalProperties": false,
   "properties": {
     "$schema": {
@@ -12,7 +12,7 @@
     "publishTo": {
       "type": "array",
       "description": "Where to publish to",
-      "oneOf":[
+      "oneOf": [
         {
           "type": "string",
           "description": "Default Supported Platforms"
@@ -24,9 +24,7 @@
       "type": "object",
       "description": "",
       "properties": {
-        "github": {
-
-        }
+        "github": {}
       }
     },
     "repository": {
