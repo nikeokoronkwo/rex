@@ -1,3 +1,17 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON Schemas for Rex Package Files",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "private": {
+      "type": "boolean",
+      "description": "Whether the given package is private or not"
+    },
+    "publish": {
+      "type": "boolean",
+      "description": "Whether to publish the given package (defaults to true)",
+      "default": true
+    }
+  }
 }
