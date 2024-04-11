@@ -1,1 +1,4 @@
-{ "publishTo": ["none"] }
+{
+  "$schema": "schemas/rex.json",
+  "publishTo": ["none"]
+}

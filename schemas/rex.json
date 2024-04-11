@@ -11,13 +11,7 @@
     },
     "publishTo": {
       "type": "array",
-      "description": "Where to publish to",
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "Default Supported Platforms"
-        }
-      ]
+      "description": "Where to publish to"
     },
     "publishChildrenTo": {},
     "workflows": {
