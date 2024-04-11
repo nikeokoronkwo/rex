@@ -18,6 +18,7 @@ export class RexConfigFile extends RexSpecialFile {
     this.repository = options?.repository;
     this.plugins = options?.plugins;
     this.mainPackage = options?.mainPackage;
+    this.rexActions = options?.rexActions;
   }
 
   static parse(contents: string) {
@@ -29,7 +30,8 @@ export class RexConfigFile extends RexSpecialFile {
         workflows: jsonObject.workflows,
         repository: jsonObject.repository,
         plugins: jsonObject.plugins,
-        mainPackage: jsonObject.mainPackage,
+        mainPackage: jsonObject.main,
+        rexActions: jsonObject.actions,
       });
     } catch (err) {
       console.error(`Error parsing 'rex.json' file: ${err}`);
