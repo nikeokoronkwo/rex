@@ -1,5 +1,13 @@
 import { Command, EnumType } from "../deps.ts";
-import { help, init, list, readme, run, publish, hooks } from "./commands/commands.ts";
+import {
+  help,
+  init,
+  list,
+  readme,
+  run,
+  publish,
+  hooks,
+} from "./commands/commands.ts";
 
 const logLevel = new EnumType(["debug", "info", "warn", "error"]);
 
@@ -18,7 +26,5 @@ const cli = new Command()
   .command("build")
   .command("publish", publish)
   .command("help", help)
-  .command("hooks", hooks)
-  ;
-
+  .command("hooks", hooks);
 export default cli;
