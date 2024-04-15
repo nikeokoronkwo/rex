@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema",
   "title": "JSON Schema for Rex Configuration",
   "description": "This details out the rex.json schema",
   "type": "object",
@@ -74,21 +74,94 @@
             "script": {
               "type": "string",
               "description": "String script to run before publishing"
+            },
+            "include": {
+              "type": "array",
+              "description": "Include the given directories"
+            },
+            "exclude": {
+              "type": "array",
+              "description": "Exclude the given directories"
             }
           }
         },
         "serve": {
           "type": "object",
-          "description": "Describe actions to run before app serving"
+          "description": "Describe actions to run before app serving",
+          "properties": {
+            "script": {
+              "type": "string",
+              "description": "String script to run before publishing"
+            },
+            "include": {
+              "type": "array",
+              "description": "Include the given directories"
+            },
+            "exclude": {
+              "type": "array",
+              "description": "Exclude the given directories"
+            }
+          }
         },
         "build": {
           "type": "object",
-          "description": "Describe actions to run before building application"
+          "description": "Describe actions to run before building application",
+          "properties": {
+            "script": {
+              "type": "string",
+              "description": "String script to run before publishing"
+            },
+            "include": {
+              "type": "array",
+              "description": "Include the given directories"
+            },
+            "exclude": {
+              "type": "array",
+              "description": "Exclude the given directories"
+            }
+          }
         },
         "git-hooks": {
           "type": "object",
-          "description": "Describe actions to run for given Git Hooks"
+          "description": "Describe actions to run for given Git Hooks",
+          "properties": {
+            "pre-commit": {
+              "$ref": "#/$defs/actions/git-commit"
+            },
+            "post-commit": {
+              "$ref": "#/$defs/actions/git-commit"
+            },
+            "pre-rebase": {
+              "$ref": "#/$defs/actions/git-commit"
+            },
+            "post-rewrite": {
+              "$ref": "#/$defs/actions/git-commit"
+            }
+          }
         }
+      }
+    }
+  },
+  "$defs": {
+    "actions": {
+      "git-commit": {
+        "description": "Tasks to run before a commit is made",
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The Script for the given action"
+          },
+          {
+            "type": "object",
+            "description": "Description for the given action",
+            "properties": {
+              "script": {
+                "type": "string",
+                "description": "Script to run for the given action"
+              }
+            }
+          }
+        ]
       }
     }
   }
