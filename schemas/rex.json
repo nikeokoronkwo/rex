@@ -84,6 +84,10 @@
         "build": {
           "type": "object",
           "description": "Describe actions to run before building application"
+        },
+        "git-hooks": {
+          "type": "object",
+          "description": "Describe actions to run for given Git Hooks"
         }
       }
     }

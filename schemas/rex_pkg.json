@@ -12,6 +12,10 @@
       "type": "boolean",
       "description": "Whether to publish the given package (defaults to true)",
       "default": true
+    },
+    "registries": {
+      "type": "array",
+      "description": "Where to publish the given package to"
     }
   }
 }
