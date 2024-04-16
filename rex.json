@@ -1,4 +1,9 @@
 {
   "$schema": "schemas/rex.json",
-  "publishTo": ["none"]
+  "publishTo": ["none"],
+  "actions": {
+    "gitHooks": {
+      "pre-commit": "yarn prettier --no-config -w . --ignore-path .gitignore"
+    }
+  }
 }

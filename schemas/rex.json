@@ -121,7 +121,8 @@
             }
           }
         },
-        "git-hooks": {
+        "compile": {},
+        "gitHooks": {
           "type": "object",
           "description": "Describe actions to run for given Git Hooks",
           "properties": {
@@ -159,7 +160,8 @@
                 "type": "string",
                 "description": "Script to run for the given action"
               }
-            }
+            },
+            "required": ["script"]
           }
         ]
       }
