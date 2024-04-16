@@ -1,5 +1,5 @@
 import { existsSync, SEPARATOR } from "../../deps.ts";
-import { RexError } from "rex";
+import { RexError } from "rex/mod.ts";
 import { runProcess } from "../lib/run/runProcess.ts";
 
 export async function runonpkgs(

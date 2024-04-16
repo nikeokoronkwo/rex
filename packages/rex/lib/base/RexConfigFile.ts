@@ -1,5 +1,6 @@
 import { RexConfigFileOptions, RexSpecialConfig } from "./RexConfig.ts";
 import { RexFile, RexSpecialFile } from "./RexFile.ts";
+import {RexConfigRexActions} from "./config/rexActions.ts";
 
 export class RexConfigFile extends RexSpecialFile {
   publishTo: string[] | undefined;
@@ -8,7 +9,7 @@ export class RexConfigFile extends RexSpecialFile {
   repository: object | string | undefined;
   plugins: object[] | undefined;
   mainPackage: object | undefined;
-  rexActions: object | undefined;
+  rexActions: any | undefined;
 
   constructor(options?: RexConfigFileOptions) {
     super("rex.json");
@@ -18,7 +19,7 @@ export class RexConfigFile extends RexSpecialFile {
     this.repository = options?.repository;
     this.plugins = options?.plugins;
     this.mainPackage = options?.mainPackage;
-    this.rexActions = options?.rexActions;
+    this.rexActions = RexConfigRexActions.parse(options?.rexActions);
   }
 
   static parse(contents: string) {

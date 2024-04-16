@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "exports": {
     "./lib": "./mod.ts",
-    "./cli": "./main.ts"
+    "./cli": "./main.ts",
+    ".": "./main.ts"
   },
   "tasks": {
     "dev": "deno run --watch main.ts"
   },
-  "imports": {
-    "rex": "https://deno.land/x/rexjs@0.0.1+alpha/mod.ts"
-  }
+  "importMap": "../../.rexmap.json"
 }

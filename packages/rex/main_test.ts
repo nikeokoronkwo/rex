@@ -3,7 +3,7 @@ import {
   assertEquals,
   assertNotEquals,
 } from "https://deno.land/std@0.218.0/assert/mod.ts";
-import { RexFile } from "rex";
+import { RexFile } from "./mod.ts";
 
 Deno.test(function RexFileTest() {
   const rfile = new RexFile("README.md", "# Hello World");

@@ -2,7 +2,7 @@ import { Command, EnumType, colors } from "../../deps.ts";
 import { addRexToProject } from "../lib/init/addRexToProject.ts";
 import { generateRexProject } from "../lib/init/generateRexProject.ts";
 import { envType } from "../shared/env.ts";
-import { RexError } from "rex";
+import { RexError } from "rex/mod.ts";
 
 const projectType = new EnumType([
   "none",

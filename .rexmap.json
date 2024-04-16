@@ -1,6 +1,6 @@
 {
   "imports": {
     "rex-cli/": "./packages/rex-cli/",
-    "rex": "./packages/rex/mod.ts"
+    "rex/": "./packages/rex/"
   }
 }
