@@ -141,6 +141,10 @@
           }
         }
       }
+    },
+    "exclude": {
+      "type": "array",
+      "description": "Exclude the given folders from commands"
     }
   },
   "$defs": {

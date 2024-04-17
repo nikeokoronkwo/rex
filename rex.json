@@ -1,9 +1,11 @@
 {
   "$schema": "schemas/rex.json",
   "publishTo": ["none"],
+  "publishChildrenTo": ["deno", "npm"],
   "actions": {
     "gitHooks": {
       "pre-commit": "yarn prettier --no-config -w . --ignore-path .gitignore"
     }
-  }
+  },
+  "exclude": ["schemas"]
 }

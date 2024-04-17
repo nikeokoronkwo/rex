@@ -1,15 +1,10 @@
 {
+  "$schema": "../../schemas/rex_pkg.json",
   "publish": {
-    "preAction": [
+    "actions": [
       {
-        "name": "npm-check",
-        "action": ""
+        "run": "deno bundle "
       }
-    ],
-    "resolveImports": {
-      "rex": "rexjs"
-    }
-  },
-  "ci": {},
-  "ignoreCommands": false
+    ]
+  }
 }

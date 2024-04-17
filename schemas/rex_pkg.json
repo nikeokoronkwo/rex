@@ -9,9 +9,34 @@
       "description": "Whether the given package is private or not"
     },
     "publish": {
-      "type": "boolean",
+      "type": "object",
       "description": "Whether to publish the given package (defaults to true)",
-      "default": true
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Actions to run before publishing the given packages",
+          "items": {
+            "type": "object",
+            "description": "The action description",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the action"
+              },
+              "run": {
+                "type": "string",
+                "description": "Action to run"
+              },
+              "performFor": {
+                "type": "array",
+                "default": ["all"],
+                "description": "The registries to run the action for. Defaults to all"
+              }
+            },
+            "required": ["run"]
+          }
+        }
+      }
     },
     "registries": {
       "type": "array",
