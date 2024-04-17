@@ -1,14 +1,26 @@
-import { existsSync, walk, walkSync, SEPARATOR } from "../../deps.ts";
+import {
+  existsSync,
+  walk,
+  walkSync,
+  SEPARATOR,
+  globToRegExp,
+} from "../../deps.ts";
 
 export function execOnRexPackages(
   closure: (name: string, path: string) => void,
 ) {
+  const folders = (
+    (JSON.parse(Deno.readTextFileSync("rex.json")).exclude as string[]) ?? []
+  ).map((e) => globToRegExp(e));
   for (const dir of walkSync(".", {
     includeFiles: false,
     includeSymlinks: false,
     includeDirs: true,
   })) {
-    if (existsSync(`${dir.path}${SEPARATOR}rex_pkg.json`)) {
+    if (
+      existsSync(`${dir.path}${SEPARATOR}rex_pkg.json`) &&
+      folders.find((e) => dir.path.match(e)) === undefined
+    ) {
       closure(dir.name, dir.path);
     }
   }

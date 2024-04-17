@@ -12,7 +12,10 @@ export async function runonpkgs(
 ) {
   switch (command) {
     case "npm":
-      if (!existsSync(`${path}${SEPARATOR}package.json`)) {
+      if (
+        !existsSync(`${path}${SEPARATOR}package.json`) &&
+        cmdToRun[1] != "init"
+      ) {
         new RexError(
           `'package.json' doesn't exist for package ${name}`,
         ).print();
@@ -23,7 +26,10 @@ export async function runonpkgs(
       }
       break;
     case "deno":
-      if (!existsSync(`${path}${SEPARATOR}deno.json`)) {
+      if (
+        !existsSync(`${path}${SEPARATOR}deno.json`) &&
+        cmdToRun[1] != "init"
+      ) {
         new RexError(`'deno.json' doesn't exist for package ${name}`).print();
         failures++;
       } else {

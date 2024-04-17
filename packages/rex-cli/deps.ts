@@ -15,4 +15,5 @@ export type { WalkEntry } from "https://deno.land/std@0.219.1/fs/mod.ts";
 export {
   globToRegExp,
   SEPARATOR,
+  normalizeGlob,
 } from "https://deno.land/std@0.220.1/path/mod.ts";

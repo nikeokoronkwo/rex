@@ -11,7 +11,7 @@ export async function runProcess(
     )}\n`,
   );
   const process = Deno.run({
-    cmd: cmdToRun,
+    cmd: ["cmd", "/c", ...cmdToRun],
     cwd: path,
     stderr: "piped",
     stdout: "piped",
