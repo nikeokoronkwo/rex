@@ -17,7 +17,12 @@ export class RexConfigRexActions {
   }
 
   static parse(obj: any) {
-    return new RexConfigRexActions(obj.publish, obj.bundle, obj.compile, obj.gitHooks);
+    return new RexConfigRexActions(
+      obj.publish,
+      obj.bundle,
+      obj.compile,
+      obj.gitHooks,
+    );
   }
 }
 
@@ -31,7 +36,7 @@ interface RexConfigGitActions {
   preCommit?: object | string;
   postCommit?: object | string;
   preRebase?: object | string;
-  postRewrite?: object | string; 
+  postRewrite?: object | string;
 }
 
 interface RexConfigGitHook {

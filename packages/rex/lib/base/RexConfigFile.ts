@@ -1,6 +1,6 @@
 import { RexConfigFileOptions, RexSpecialConfig } from "./RexConfig.ts";
 import { RexFile, RexSpecialFile } from "./RexFile.ts";
-import {RexConfigRexActions} from "./config/rexActions.ts";
+import { RexConfigRexActions } from "./config/rexActions.ts";
 
 export class RexConfigFile extends RexSpecialFile {
   publishTo: string[] | undefined;
