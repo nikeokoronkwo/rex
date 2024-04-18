@@ -1,7 +1,8 @@
 private/
-node_modules/
+**/node_modules/
 demo.ts
 deno.lock
 deno.lock
 deno.lock
 **/deno.lock
+**/npm/

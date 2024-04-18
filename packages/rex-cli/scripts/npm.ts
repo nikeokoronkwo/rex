@@ -15,26 +15,22 @@ await build({
     // package.json properties
     name: "@prouesse/rex-cli",
     version: "0.0.1",
-    description: "The Rex Monorepo CLI Tool, used for building the greatest in JS!",
+    description:
+      "The Rex Monorepo CLI Tool, used for building the greatest in JS!",
     license: "MIT",
-    keywords: [
-        "rex",
-        "monorepo",
-        "typescript",
-        "rexjs"
-    ],
+    keywords: ["rex", "monorepo", "typescript", "rexjs"],
     repository: {
       type: "git",
       url: "https://github.com/nikeokoronkwo/rex",
     },
     bugs: {
       url: "https://github.com/nikeokoronkwo/rex/issues",
-      email: "nikechukwu@nugegroup.com"
+      email: "nikechukwu@nugegroup.com",
     },
     author: "Nikechukwu Okoronkwo <nikechukwu@nugegroup.com>",
     bin: {
-        rex: "main.js"
-    }
+      rex: "main.js",
+    },
   },
   postBuild() {
     // steps to run after building and before running the tests

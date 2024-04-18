@@ -8,6 +8,9 @@
     "typescript",
     "rexjs"
   ],
+  "files": [
+    "npm/**"
+  ],
   "repository": "https://github.com/nikeokoronkwo/rex",
   "bugs": {
     "url": "https://github.com/nikeokoronkwo/rex/issues",
