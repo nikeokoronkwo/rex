@@ -9,3 +9,4 @@ export { RexImportMapFile } from "./base/RexImportMapFile.ts";
 export { RexDenoFile, RexJSRFile } from "./base/RexEnvFiles.ts";
 
 export { RexError } from "./errors/RexError.ts";
+export type { RexPkgPubActions } from "./cmds/RexPkgPubActions.ts";

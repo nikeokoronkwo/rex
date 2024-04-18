@@ -4,7 +4,7 @@ export {
   HelpCommand,
 } from "https://deno.land/x/cliffy/command/mod.ts";
 export { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
-export { blue } from "https://deno.land/std@0.196.0/fmt/colors.ts";
+export { blue, bold } from "https://deno.land/std@0.196.0/fmt/colors.ts";
 export {
   existsSync,
   exists,
@@ -26,3 +26,4 @@ export {
   RexJSRFile,
   RexPkgConfigFile,
 } from "rex/mod.ts";
+export type { RexPkgPubActions } from "rex/mod.ts";

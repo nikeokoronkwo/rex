@@ -1,4 +1,4 @@
-import { Command, EnumType, SEPARATOR, existsSync, bold,  } from "../../deps.ts";
+import { Command, EnumType, SEPARATOR, existsSync, bold } from "../../deps.ts";
 import { runProcess } from "../lib/run/runProcess.ts";
 import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
@@ -35,7 +35,10 @@ By default cli arguments override.
     "--no-config",
     "Do not use 'rex_pkg.json' when configuring publishing pipeline",
   )
-  .option("-c --custom <platform:string>", "Use custom command <platform> to publish package (e.g yarn)")
+  .option(
+    "-c --custom <platform:string>",
+    "Use custom command <platform> to publish package (e.g yarn)",
+  )
   .arguments("<type:pub-type>")
   .action(async (options, args) => {
     await publishCommand(options, args);
@@ -83,7 +86,6 @@ async function publishCommand(
         fails = failures;
         passes = successes;
       });
-      
     });
   } else {
     console.log("Publishing the main monorepo is not supported yet");

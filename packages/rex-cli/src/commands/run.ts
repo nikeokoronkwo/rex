@@ -57,7 +57,7 @@ async function runCommand(options: any, args: string[]) {
         name,
         f,
         cmdToRun,
-        s
+        s,
       );
       f = failures;
       s = successes;

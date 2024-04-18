@@ -8,4 +8,8 @@ export {
   RexPkgConfigFile,
   RexSpecialFile,
 } from "./lib/rex.ts";
-export type { RexConfigFileOptions, RexSpecialConfig } from "./lib/rex.ts";
+export type {
+  RexConfigFileOptions,
+  RexSpecialConfig,
+  RexPkgPubActions,
+} from "./lib/rex.ts";
