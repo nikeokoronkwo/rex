@@ -2,7 +2,12 @@
   "name": "@prouesse/rex",
   "version": "1.0.0",
   "description": "The Rex Monorepo Tool, used for building the greatest in JS!",
-  "keywords": ["rex", "monorepo", "typescript", "rexjs"],
+  "keywords": [
+    "rex",
+    "monorepo",
+    "typescript",
+    "rexjs"
+  ],
   "repository": "https://github.com/nikeokoronkwo/rex",
   "bugs": {
     "url": "https://github.com/nikeokoronkwo/rex/issues",

@@ -1,12 +1,11 @@
 {
-    "$schema": "../../schemas/rex_pkg.json",
-    "publish": {
-      "actions": [
-        {
-          "run": "deno bundle mod.ts index.js",
-          "performFor": ["npm"]
-        }
-      ]
-    }
+  "$schema": "../../schemas/rex_pkg.json",
+  "publish": {
+    "actions": [
+      {
+        "run": "deno bundle mod.ts index.js",
+        "performFor": ["npm"]
+      }
+    ]
   }
-  
+}
