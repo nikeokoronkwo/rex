@@ -6,8 +6,8 @@ import {
   globToRegExp,
 } from "../../deps.ts";
 
-export function execOnRexPackages(
-  closure: (name: string, path: string) => void,
+export async function execOnRexPackages(
+  closure: (name: string, path: string) => Promise<void> | void,
 ) {
   const folders = (
     (JSON.parse(Deno.readTextFileSync("rex.json")).exclude as string[]) ?? []
@@ -21,7 +21,7 @@ export function execOnRexPackages(
       existsSync(`${dir.path}${SEPARATOR}rex_pkg.json`) &&
       folders.find((e) => dir.path.match(e)) === undefined
     ) {
-      closure(dir.name, dir.path);
+      await Promise.resolve(closure(dir.name, dir.path));
     }
   }
 }

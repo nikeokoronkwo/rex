@@ -1,9 +1,9 @@
-import { bold } from "https://deno.land/std@0.196.0/fmt/colors.ts";
-import { Command, EnumType, SEPARATOR, existsSync } from "../../deps.ts";
+import { Command, EnumType, SEPARATOR, existsSync, bold,  } from "../../deps.ts";
 import { runProcess } from "../lib/run/runProcess.ts";
 import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
+import { RexPkgPubActions } from "../../../rex/lib/cmds/RexPkgPubActions.ts";
 
 const publishType = new EnumType(["children", "main"]);
 
@@ -35,24 +35,26 @@ By default cli arguments override.
     "--no-config",
     "Do not use 'rex_pkg.json' when configuring publishing pipeline",
   )
+  .option("-c --custom <platform:string>", "Use custom command <platform> to publish package (e.g yarn)")
   .arguments("<type:pub-type>")
-  .action((options, args) => {
-    publishCommand(options, args);
+  .action(async (options, args) => {
+    await publishCommand(options, args);
   });
 export default publish;
 
-function publishCommand(
+async function publishCommand(
   options: {
     dryRun?: true | undefined;
     ignore?: ("npm" | "deno" | "jsr" | "all" | "none")[] | undefined;
     bundle?: true | string[] | undefined;
     tscCompile?: true | undefined;
     config: boolean;
+    custom?: string | undefined;
   },
   args: "children" | "main",
 ) {
   if (args === "children") {
-    execOnRexPackages((name, path) => {
+    await execOnRexPackages((name, path) => {
       let envs = (options.ignore ?? []).includes("all")
         ? []
         : getRexPkgEnvs(path, options.ignore);
@@ -68,19 +70,20 @@ function publishCommand(
             (e.performFor ?? ["all"]).includes("all"),
         );
         pkgActions.forEach(async (a) => {
-          await runProcess(name, path, [a.run]);
+          await runProcess(name, path, [a.run], true);
         });
         let { failures, successes } = await runonpkgs(
           env.name,
           path,
           name,
           fails,
-          [env.name == "npm" ? "npm" : "deno", "publish"],
+          [deduceCmd(env, options.custom), "publish"],
           passes,
         );
         fails = failures;
         passes = successes;
       });
+      
     });
   } else {
     console.log("Publishing the main monorepo is not supported yet");
@@ -89,17 +92,16 @@ function publishCommand(
 
 type Actions = RexPkgPubActions;
 
-interface RexPkgPubActions {
-  name?: string;
-  run: string;
-  performFor: string[];
-}
-
 type envFile = {
   name: string;
   pkgName?: string;
   configPath: string;
 };
+
+function deduceCmd(env: envFile, custom?: string): string {
+  if (custom) return custom;
+  return env.name == "npm" ? "npm" : "deno";
+}
 
 function getRexPkgEnvs(path: string, ignore?: string[]): envFile[] {
   let names: envFile[] = [];

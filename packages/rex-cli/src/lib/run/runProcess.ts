@@ -4,6 +4,7 @@ export async function runProcess(
   name: string,
   path: string,
   cmdToRun: string[],
+  exitOnError?: boolean | undefined
 ) {
   console.log(
     `Running "${cmdToRun.join(" ")}" in ${colors.blue(name)} at ${colors.italic(
@@ -28,9 +29,13 @@ export async function runProcess(
   } else {
     console.log(
       `${colors.red(
-        "Failed",
+        `Failed at ${colors.white.bold(name)}`,
       )}: Process exited with exit code ${status.code}: \n${new TextDecoder().decode(stderr)}`,
     );
+    if (exitOnError) {
+	    process.close();
+	    Deno.exit(1);
+    }
   }
-  process.close();
+  await process.close();
 }
