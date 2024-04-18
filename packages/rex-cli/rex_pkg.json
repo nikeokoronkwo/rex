@@ -3,7 +3,8 @@
   "publish": {
     "actions": [
       {
-        "run": "deno bundle "
+        "run": "deno bundle main.ts main.js",
+        "performFor": ["npm"]
       }
     ]
   }
