@@ -9,12 +9,18 @@ await build({
   shims: {
     deno: true,
   },
+  filterDiagnostic(diagnostic) {
+    if (diagnostic.file?.fileName.includes("cliffy@v1.0.0-rc.3")) {
+      return false;
+    }
+    return true;
+  },
   importMap: "../../.rexmap.json",
   scriptModule: false,
   package: {
     // package.json properties
     name: "@prouesse/rex-cli",
-    version: "0.0.1",
+    version: "0.0.1-pre",
     description:
       "The Rex Monorepo CLI Tool, used for building the greatest in JS!",
     license: "MIT",
@@ -29,7 +35,7 @@ await build({
     },
     author: "Nikechukwu Okoronkwo <nikechukwu@nugegroup.com>",
     bin: {
-      rex: "main.js",
+      rex: "./esm/rex-cli/main.js",
     },
   },
   postBuild() {

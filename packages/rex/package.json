@@ -14,6 +14,10 @@
     "email": "nikechukwu@nugegroup.com"
   },
   "author": "Nikechukwu Okoronkwo <nikechukwu@nugegroup.com>",
+  "type": "module",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
   "license": "MIT"
 }
