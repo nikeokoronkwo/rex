@@ -1,4 +1,4 @@
-import { RexConfigFile, RexFile } from "rex/mod.ts";
+import { RexConfigFile, RexFile } from "../../../deps.ts";
 import { Command, EnumType, existsSync, blue } from "../../../deps.ts";
 
 const hookType = new EnumType([

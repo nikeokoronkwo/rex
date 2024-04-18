@@ -1,5 +1,4 @@
-import { RexConfigFile } from "rex/mod.ts";
-import { RexFile } from "rex/mod.ts";
+import { RexConfigFile, RexFile } from "../../../deps.ts";
 
 export function generateRexProject(
   template: string,

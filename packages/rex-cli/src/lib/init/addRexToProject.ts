@@ -6,8 +6,7 @@ import {
   RexImportMapFile,
   RexJSRFile,
   RexPkgConfigFile,
-  RexSpecialFile,
-} from "rex/mod.ts";
+} from "../../../deps.ts";
 
 export function addRexToProject(
   packages: string[],
