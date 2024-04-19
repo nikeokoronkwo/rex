@@ -3,7 +3,11 @@
   "publish": {
     "actions": [
       {
-        "run": "deno bundle mod.ts index.js",
+        "run": "deno task bundle",
+        "performFor": ["npm"]
+      },
+      {
+        "run": "deno task npm",
         "performFor": ["npm"]
       },
       {

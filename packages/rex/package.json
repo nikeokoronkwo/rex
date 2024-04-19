@@ -1,6 +1,6 @@
 {
-  "name": "@prouesse/rex",
-  "version": "1.0.0",
+  "name": "@rex-js/rex",
+  "version": "0.0.1-pre",
   "description": "The Rex Monorepo Tool, used for building the greatest in JS!",
   "keywords": [
     "rex",

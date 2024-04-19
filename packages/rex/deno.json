@@ -1,8 +1,10 @@
 {
-  "name": "@rex/rex",
+  "name": "@rex-js/rex",
   "version": "0.0.1",
   "exports": "./mod.ts",
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "test": "deno test",
+    "npm": "deno run -A scripts/npm.ts",
+    "bundle": "deno run -A scripts/bundle.ts"
   }
 }
