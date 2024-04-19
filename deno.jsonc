@@ -1,9 +1,8 @@
 {
   "name": "@rex/rex-workspace",
-  "version": "0.1.0",
   "lint": {
     "include": ["lib/"],
-    "exclude": ["node_modules/"],
+    "exclude": ["node_modules/"]
   },
   "exports": "./mod.ts",
   "tasks": {
@@ -11,7 +10,7 @@
     "build": "deno run -A packages/rex/main.ts",
     "compile": "deno compile bin/main.ts",
     "npm": "deno run -A scripts/npm.ts",
-    "prepare": "husky",
+    "prepare": "husky"
   },
-  "importMap": "./.rexmap.json",
+  "importMap": "./.rexmap.json"
 }
