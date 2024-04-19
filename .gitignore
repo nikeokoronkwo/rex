@@ -6,3 +6,4 @@ deno.lock
 deno.lock
 **/deno.lock
 **/npm/
+internal/

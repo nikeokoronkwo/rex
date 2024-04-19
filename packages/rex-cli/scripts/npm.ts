@@ -1,4 +1,3 @@
-// ex. scripts/build_npm.ts
 import { build, emptyDir } from "https://deno.land/x/dnt@0.40.0/mod.ts";
 
 const pkgVer = JSON.parse(Deno.readTextFileSync("./deno.json")).version;
