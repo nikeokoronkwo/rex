@@ -17,5 +17,5 @@ export {
   RexImportMapFile,
   RexJSRFile,
   RexPkgConfigFile,
-} from "rex/mod.ts";
-export type { RexPkgPubActions } from "rex/mod.ts";
+} from "../../packages/rex/mod.ts";
+export type { RexPkgPubActions } from "../../packages/rex/mod.ts";
