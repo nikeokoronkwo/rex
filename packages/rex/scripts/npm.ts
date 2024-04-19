@@ -23,5 +23,7 @@ const pkgJson = {
   license: "MIT",
 };
 
-if (existsSync("./package.json")) Deno.removeSync("./package.json")
-Deno.createSync("./package.json").writeSync(new TextEncoder().encode(JSON.stringify(pkgJson)));
+if (existsSync("./package.json")) Deno.removeSync("./package.json");
+Deno.createSync("./package.json").writeSync(
+  new TextEncoder().encode(JSON.stringify(pkgJson)),
+);

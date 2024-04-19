@@ -14,11 +14,13 @@ await emptyDir("./npm");
 // TODO: Get Version
 
 await build({
-  entryPoints: [{
-    kind: "bin",
-    name: "rex",
-    path: "./main.ts"
-  }],
+  entryPoints: [
+    {
+      kind: "bin",
+      name: "rex",
+      path: "./main.ts",
+    },
+  ],
   outDir: "./npm",
   shims: {
     deno: true,
@@ -26,7 +28,10 @@ await build({
   filterDiagnostic(diagnostic) {
     // Avoid typechecking remote "cliffy"
     // The bundled "rex" module doesn't have a follow-up .d.ts file
-    if (diagnostic.file?.fileName.includes("cliffy") || diagnostic.file?.fileName.includes("deps.ts")) {
+    if (
+      diagnostic.file?.fileName.includes("cliffy") ||
+      diagnostic.file?.fileName.includes("deps.ts")
+    ) {
       return false;
     }
     return true;

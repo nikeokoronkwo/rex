@@ -7,6 +7,11 @@
         "performFor": ["npm"]
       },
       {
+        "name": "Generate types",
+        "run": "tsc *.js --declaration --allowJs --emitDeclarationOnly",
+        "performFor": ["npm"]
+      },
+      {
         "run": "deno task npm",
         "performFor": ["npm"]
       },

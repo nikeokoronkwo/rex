@@ -1,6 +1,6 @@
 {
   "name": "@rex-js/rex",
-  "version": "0.0.1",
+  "version": "0.0.1-pre",
   "exports": "./mod.ts",
   "tasks": {
     "test": "deno test",
