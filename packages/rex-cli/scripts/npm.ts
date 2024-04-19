@@ -10,8 +10,6 @@ const rexPkgVer = JSON.parse(
 
 await emptyDir("./npm");
 
-// TODO: Get Version
-
 await build({
   entryPoints: [
     {

@@ -1,7 +1,8 @@
-import { existsSync } from "https://deno.land/std@0.223.0/fs/exists.ts";
+import { build, emptyDir } from "https://deno.land/x/dnt@0.40.0/mod.ts";
 
-// TODO: Generate package.json
 const pkgVer = JSON.parse(Deno.readTextFileSync("./deno.json")).version;
+
+await emptyDir("./npm");
 
 const pkgJson = {
   name: "@rex-js/rex",
@@ -14,16 +15,27 @@ const pkgJson = {
     email: "nikechukwu@nugegroup.com",
   },
   author: "Nikechukwu Okoronkwo <nikechukwu@nugegroup.com>",
-  type: "module",
-  main: "index.js",
-  exports: {
-    ".": "./index.js",
-    "./min": "./index.min.js",
-  },
   license: "MIT",
 };
 
-if (existsSync("./package.json")) Deno.removeSync("./package.json");
-Deno.createSync("./package.json").writeSync(
-  new TextEncoder().encode(JSON.stringify(pkgJson)),
-);
+await build({
+  entryPoints: ["./mod.ts"],
+  outDir: "./npm",
+  shims: {
+    deno: true,
+  },
+  package: pkgJson,
+  scriptModule: "cjs",
+  postBuild() {
+    // steps to run after building and before running the tests
+    Deno.copyFileSync("LICENSE", "npm/LICENSE");
+    Deno.copyFileSync("README.md", "npm/README.md");
+    Deno.copyFileSync("../../CHANGELOG.md", "npm/CHANGELOG.md");
+    Deno.createSync("npm/.gitignore").writeSync(
+      new TextEncoder().encode(`node_modules/`),
+    );
+    Deno.writeTextFileSync("npm/.npmignore", "\nnode_modules/", {
+      append: true,
+    });
+  },
+});
