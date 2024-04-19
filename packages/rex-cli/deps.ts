@@ -1,22 +1,32 @@
 export {
-  Command,
-  EnumType,
-  HelpCommand,
-} from "https://deno.land/x/cliffy/command/mod.ts";
-export { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
-export { blue, bold } from "https://deno.land/std@0.196.0/fmt/colors.ts";
+  Command
+} from "https://deno.land/x/cliffy/command/command.ts";
+export {
+  EnumType
+} from "https://deno.land/x/cliffy/command/types/enum.ts";
+export {
+  HelpCommand
+} from "https://deno.land/x/cliffy/command/help/help_command.ts";
+export { colors } from "https://deno.land/x/cliffy/ansi/colors.ts";
+export { blue, bold } from "https://deno.land/std/fmt/colors.ts";
 export {
   existsSync,
   exists,
+} from "https://deno.land/std/fs/exists.ts";
+export {
   walk,
   walkSync,
-} from "https://deno.land/std@0.219.1/fs/mod.ts";
-export type { WalkEntry } from "https://deno.land/std@0.219.1/fs/mod.ts";
+} from "https://deno.land/std/fs/walk.ts";
+export type { WalkEntry } from "https://deno.land/std/fs/walk.ts";
 export {
-  globToRegExp,
-  SEPARATOR,
-  normalizeGlob,
-} from "https://deno.land/std@0.220.1/path/mod.ts";
+  globToRegExp
+} from "https://deno.land/std/path/glob_to_regexp.ts";
+export {
+  SEPARATOR
+} from "https://deno.land/std/path/constants.ts";
+export {
+  normalizeGlob
+} from "https://deno.land/std/path/normalize_glob.ts";
 export {
   RexError,
   RexConfigFile,
