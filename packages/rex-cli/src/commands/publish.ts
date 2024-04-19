@@ -1,9 +1,15 @@
-import { Command, EnumType, SEPARATOR, existsSync, bold } from "../../deps.ts";
+import {
+  Command,
+  EnumType,
+  SEPARATOR,
+  existsSync,
+  bold,
+  RexPkgPubActions,
+} from "../../deps.ts";
 import { runProcess } from "../lib/run/runProcess.ts";
 import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
-import { RexPkgPubActions } from "../../../rex/lib/cmds/RexPkgPubActions.ts";
 
 const publishType = new EnumType(["children", "main"]);
 
@@ -20,13 +26,13 @@ By default cli arguments override.
   )
   .option("-n --dry-run", "Perform a dry run, do not publish yet")
   .option(
-    "-i --ignore <env...:env-type>",
+    "-i --ignore <env:env-type>",
     "Ignore publishing packages to the given <env>(s)",
+    {
+      collect: true,
+    },
   )
-  .option(
-    "-b --bundle [args...:string]",
-    "Bundle Packages before publishing and pass ",
-  )
+  .option("-b --bundle", "Bundle Packages before publishing and pass ")
   .option(
     "--tsc-compile",
     "Compile to TypeScript with given args before publishing",
@@ -38,6 +44,14 @@ By default cli arguments override.
   .option(
     "-c --custom <platform:string>",
     "Use custom command <platform> to publish package (e.g yarn)",
+  )
+  .option(
+    "--npm-args <...args:string>",
+    "Flags to pass to npm, if applicable (in the form 'name=value' (use full name))",
+  )
+  .option(
+    "--deno-args <...args:string>",
+    "Flags to pass to deno, if applicable (in the form 'name=value' (use full name))",
   )
   .arguments("<type:pub-type>")
   .action(async (options, args) => {
@@ -53,6 +67,8 @@ async function publishCommand(
     tscCompile?: true | undefined;
     config: boolean;
     custom?: string | undefined;
+    denoArgs?: string[] | undefined;
+    npmArgs?: string[] | undefined;
   },
   args: "children" | "main",
 ) {
@@ -72,16 +88,29 @@ async function publishCommand(
             (e.performFor ?? ["all"]).includes(env.name) ||
             (e.performFor ?? ["all"]).includes("all"),
         );
-        pkgActions.forEach(async (a) => {
+
+        for (const a of pkgActions) {
           await runProcess(name, path, [a.run], true);
-        });
-        let { failures, successes } = await runonpkgs(
-          env.name,
-          path,
-          name,
-          fails,
-          [deduceCmd(env, options.custom), "publish"],
-          passes,
+        }
+
+        const cmd = deduceCmd(env, options.custom);
+        let npmArgs = options.npmArgs ?? [];
+        let denoArgs = options.denoArgs ?? [];
+        let { failures, successes } = await Promise.resolve(
+          runonpkgs(
+            env.name,
+            path,
+            name,
+            fails,
+            [cmd, "publish"].concat(
+              cmd === "npm"
+                ? npmArgs.map((e) => `--${e}`)
+                : cmd === "deno"
+                  ? denoArgs.map((e) => `--${e}`)
+                  : [],
+            ),
+            passes,
+          ),
         );
         fails = failures;
         passes = successes;
