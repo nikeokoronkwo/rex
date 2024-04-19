@@ -69,57 +69,59 @@ async function publishCommand(
   },
   args: string,
 ) {
-    await execOnRexPackages(async (name, path) => {
-    const rexPkgFile = JSON.parse(Deno.readTextFileSync(`${path}/rex_pkg.json`));
-      // Get Actions to run
-      let actions: Actions[] =
-        rexPkgFile.publish
-          .actions ?? [];
-      let pwd = rexPkgFile.publish.dir ?? "."
-      
-      // Filter actions to obtain those not ignored
-      let pkgActions = actions.filter(
-        (e: Actions) =>
-          (e.performFor ?? ["all"]).filter((a: "npm" | "deno" | "jsr" | "all" | "none") => options.ignore?.includes(a) ?? false).length === 0 ||
-          (e.performFor ?? ["all"]).includes("all"),
-      );
+  await execOnRexPackages(async (name, path) => {
+    const rexPkgFile = JSON.parse(
+      Deno.readTextFileSync(`${path}/rex_pkg.json`),
+    );
+    // Get Actions to run
+    let actions: Actions[] = rexPkgFile.publish.actions ?? [];
+    let pwd = rexPkgFile.publish.dir ?? ".";
 
-      for (const a of pkgActions) {
-        await runProcess(name, path, [a.run], true);
-      }
+    // Filter actions to obtain those not ignored
+    let pkgActions = actions.filter(
+      (e: Actions) =>
+        (e.performFor ?? ["all"]).filter(
+          (a: "npm" | "deno" | "jsr" | "all" | "none") =>
+            options.ignore?.includes(a) ?? false,
+        ).length === 0 || (e.performFor ?? ["all"]).includes("all"),
+    );
 
-      let envs = (options.ignore ?? []).includes("all")
-        ? []
-        : getRexPkgEnvs(path, options.ignore);
-      
-      let fails = 0;
-      let passes = 0;
-      envs.forEach(async (env) => {
-        const cmd = deduceCmd(env, options.custom);
+    for (const a of pkgActions) {
+      await runProcess(name, path, [a.run], true);
+    }
 
-        let npmArgs = options.npmArgs ?? [];
-        let denoArgs = options.denoArgs ?? [];
+    let envs = (options.ignore ?? []).includes("all")
+      ? []
+      : getRexPkgEnvs(path, options.ignore);
 
-        let { failures, successes } = await Promise.resolve(
-          runonpkgs(
-            env.name,
-            `${path}${pwd == '.' ? '' : `${SEPARATOR}${pwd}`}`,
-            name,
-            fails,
-            [cmd, "publish"].concat(
-              cmd === "npm"
-                ? npmArgs.map((e) => `--${e}`)
-                : cmd === "deno"
-                  ? denoArgs.map((e) => `--${e}`)
-                  : [],
-            ),
-            passes,
+    let fails = 0;
+    let passes = 0;
+    envs.forEach(async (env) => {
+      const cmd = deduceCmd(env, options.custom);
+
+      let npmArgs = options.npmArgs ?? [];
+      let denoArgs = options.denoArgs ?? [];
+
+      let { failures, successes } = await Promise.resolve(
+        runonpkgs(
+          env.name,
+          `${path}${pwd == "." ? "" : `${SEPARATOR}${pwd}`}`,
+          name,
+          fails,
+          [cmd, "publish"].concat(
+            cmd === "npm"
+              ? npmArgs.map((e) => `--${e}`)
+              : cmd === "deno"
+                ? denoArgs.map((e) => `--${e}`)
+                : [],
           ),
-        );
-        fails = failures;
-        passes = successes;
-      });
+          passes,
+        ),
+      );
+      fails = failures;
+      passes = successes;
     });
+  });
 }
 
 type Actions = RexPkgPubActions;
