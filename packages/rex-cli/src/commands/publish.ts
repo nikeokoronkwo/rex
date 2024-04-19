@@ -53,7 +53,7 @@ By default cli arguments override.
     "--deno-args <...args:string>",
     "Flags to pass to deno, if applicable (in the form 'name=value' (use full name))",
   )
-  .arguments("<type:pub-type>")
+  .arguments("[type:pub-type]")
   .action(async (options, args) => {
     await publishCommand(options, args);
   });
@@ -70,9 +70,9 @@ async function publishCommand(
     denoArgs?: string[] | undefined;
     npmArgs?: string[] | undefined;
   },
-  args: "children" | "main",
+  args: "children" | "main" | undefined,
 ) {
-  if (args === "children") {
+  if (args === "children" || args === undefined) {
     await execOnRexPackages((name, path) => {
       let envs = (options.ignore ?? []).includes("all")
         ? []
