@@ -9,9 +9,5 @@
   "tasks": {
     "dev": "deno run -A main.ts",
     "npm": "deno run -A scripts/npm.ts"
-  },
-  "imports": {
-    "rex-cli/": "../../packages/rex-cli/",
-    "rex/": "https://deno.land/x/rexjs@0.0.1/"
   }
 }

@@ -17,5 +17,5 @@ export {
   RexImportMapFile,
   RexJSRFile,
   RexPkgConfigFile,
-} from "../../packages/rex/mod.ts";
-export type { RexPkgPubActions } from "../../packages/rex/mod.ts";
+} from "https://deno.land/x/rexjs@0.0.2-grade/mod.ts";
+export type { RexPkgPubActions } from "https://deno.land/x/rexjs@0.0.2-grade/mod.ts";
