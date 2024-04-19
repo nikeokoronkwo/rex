@@ -8,7 +8,6 @@
   },
   "tasks": {
     "dev": "deno run -A main.ts",
-    "bundle": "deno run -A scripts/bundle.ts",
     "npm": "deno run -A scripts/npm.ts"
   },
   "importMap": "../../.rexmap.json"
