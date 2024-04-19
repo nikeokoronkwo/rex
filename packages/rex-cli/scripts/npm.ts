@@ -55,6 +55,8 @@ await build({
     Deno.createSync("npm/.gitignore").writeSync(
       new TextEncoder().encode(`node_modules/`),
     );
-    Deno.writeTextFileSync("npm/.npmignore", "\nnode_modules/", { append: true });
+    Deno.writeTextFileSync("npm/.npmignore", "\nnode_modules/", {
+      append: true,
+    });
   },
 });
