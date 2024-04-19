@@ -1,3 +1,5 @@
+import { existsSync } from "https://deno.land/std@0.223.0/fs/exists.ts";
+
 // TODO: Generate package.json
 const pkgVer = JSON.parse(Deno.readTextFileSync("./deno.json")).version;
 
@@ -16,9 +18,10 @@ const pkgJson = {
   main: "index.js",
   exports: {
     ".": "./index.js",
-    min: "./index.min.js",
+    "./min": "./index.min.js",
   },
   license: "MIT",
 };
 
-Deno.createSync("./package.json");
+if (existsSync("./package.json")) Deno.removeSync("./package.json")
+Deno.createSync("./package.json").writeSync(new TextEncoder().encode(JSON.stringify(pkgJson)));

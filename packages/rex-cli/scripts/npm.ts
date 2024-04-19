@@ -14,13 +14,19 @@ await emptyDir("./npm");
 // TODO: Get Version
 
 await build({
-  entryPoints: ["./main.ts"],
+  entryPoints: [{
+    kind: "bin",
+    name: "rex",
+    path: "./main.ts"
+  }],
   outDir: "./npm",
   shims: {
     deno: true,
   },
   filterDiagnostic(diagnostic) {
-    if (diagnostic.file?.fileName.includes("cliffy")) {
+    // Avoid typechecking remote "cliffy"
+    // The bundled "rex" module doesn't have a follow-up .d.ts file
+    if (diagnostic.file?.fileName.includes("cliffy") || diagnostic.file?.fileName.includes("deps.ts")) {
       return false;
     }
     return true;
@@ -51,9 +57,6 @@ await build({
       email: "nikechukwu@nugegroup.com",
     },
     author: "Nikechukwu Okoronkwo <nikechukwu@nugegroup.com>",
-    bin: {
-      rex: "./esm/rex-cli/main.js",
-    },
   },
   postBuild() {
     // steps to run after building and before running the tests
