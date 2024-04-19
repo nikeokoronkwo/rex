@@ -1,6 +1,14 @@
 // ex. scripts/build_npm.ts
 import { build, emptyDir } from "https://deno.land/x/dnt@0.40.0/mod.ts";
 
+const pkgVer = JSON.parse(Deno.readTextFileSync("./deno.json")).version;
+
+const rexDest = `../../${JSON.parse(Deno.readTextFileSync("../../.rexmap.json")).imports["rex/"]}`;
+
+const rexPkgVer = JSON.parse(
+  Deno.readTextFileSync(`${rexDest}deno.json`),
+).version;
+
 await emptyDir("./npm");
 
 // TODO: Get Version
@@ -12,7 +20,7 @@ await build({
     deno: true,
   },
   filterDiagnostic(diagnostic) {
-    if (diagnostic.file?.fileName.includes("cliffy@v1.0.0-rc.3")) {
+    if (diagnostic.file?.fileName.includes("cliffy")) {
       return false;
     }
     return true;
@@ -21,7 +29,7 @@ await build({
   mappings: {
     "../rex/mod.ts": {
       name: "@rex-js/rex",
-      version: "^0.0.1",
+      version: `^${rexPkgVer}`,
       peerDependency: true,
     },
   },
@@ -29,7 +37,7 @@ await build({
   package: {
     // package.json properties
     name: "@rex-js/rex-cli",
-    version: "0.0.1",
+    version: pkgVer,
     description:
       "The Rex Monorepo CLI Tool, used for building the greatest in JS!",
     license: "MIT",
