@@ -1,5 +1,5 @@
 export interface RexPkgPubActions {
   name?: string;
   run: string;
-  performFor: string[];
+  performFor: ("npm" | "deno" | "jsr" | "all" | "none")[];
 }

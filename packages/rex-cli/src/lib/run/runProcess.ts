@@ -24,13 +24,13 @@ export async function runProcess(
   ]);
   if (status.success) {
     console.log(
-      `${colors.green("Success")}: Process suceeded at ${name} \n${new TextDecoder().decode(stdout)}`,
+      `${colors.green("Success")}: Process "${cmdToRun.join(" ")}" suceeded at ${name} \n${new TextDecoder().decode(stdout)}`,
     );
   } else {
     console.log(
       `${colors.red(
         `Failed at ${colors.white.bold(name)}`,
-      )}: Process exited with exit code ${status.code}: \n${new TextDecoder().decode(stderr)}`,
+      )}: Process "${cmdToRun.join(" ")}" exited with exit code ${status.code}: \n${new TextDecoder().decode(stderr)}`,
     );
     if (exitOnError) {
       process.close();

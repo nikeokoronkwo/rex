@@ -13,7 +13,7 @@ const logLevel = new EnumType(["debug", "info", "warn", "error"]);
 
 const cli = new Command()
   .name("rex")
-  .version("0.1.0")
+  .version("0.0.1")
   .description("Mono Repo for Deno, Node and Bun Projects")
   .globalOption("-v --verbose", "Print verbose logging output")
   .default("init")

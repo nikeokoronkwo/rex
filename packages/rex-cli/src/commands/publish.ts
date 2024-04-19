@@ -11,10 +11,7 @@ import { envType } from "../shared/env.ts";
 import { execOnRexPackages } from "../shared/execFunc.ts";
 import { runonpkgs } from "../shared/runonpkgs.ts";
 
-const publishType = new EnumType(["children", "main"]);
-
 const publish = new Command()
-  .type("pub-type", publishType)
   .type("env-type", envType)
   .description(
     `
@@ -53,7 +50,7 @@ By default cli arguments override.
     "--deno-args <...args:string>",
     "Flags to pass to deno, if applicable (in the form 'name=value' (use full name))",
   )
-  .arguments("[type:pub-type]")
+  .arguments("[packages...]")
   .action(async (options, args) => {
     await publishCommand(options, args);
   });
@@ -70,36 +67,43 @@ async function publishCommand(
     denoArgs?: string[] | undefined;
     npmArgs?: string[] | undefined;
   },
-  args: "children" | "main" | undefined,
+  args: string,
 ) {
-  if (args === "children" || args === undefined) {
-    await execOnRexPackages((name, path) => {
+    await execOnRexPackages(async (name, path) => {
+    const rexPkgFile = JSON.parse(Deno.readTextFileSync(`${path}/rex_pkg.json`));
+      // Get Actions to run
+      let actions: Actions[] =
+        rexPkgFile.publish
+          .actions ?? [];
+      let pwd = rexPkgFile.publish.dir ?? "."
+      
+      // Filter actions to obtain those not ignored
+      let pkgActions = actions.filter(
+        (e: Actions) =>
+          (e.performFor ?? ["all"]).filter((a: "npm" | "deno" | "jsr" | "all" | "none") => options.ignore?.includes(a) ?? false).length === 0 ||
+          (e.performFor ?? ["all"]).includes("all"),
+      );
+
+      for (const a of pkgActions) {
+        await runProcess(name, path, [a.run], true);
+      }
+
       let envs = (options.ignore ?? []).includes("all")
         ? []
         : getRexPkgEnvs(path, options.ignore);
-      let actions: Actions[] =
-        JSON.parse(Deno.readTextFileSync(`${path}/rex_pkg.json`)).publish
-          .actions ?? [];
+      
       let fails = 0;
       let passes = 0;
       envs.forEach(async (env) => {
-        let pkgActions = actions.filter(
-          (e: Actions) =>
-            (e.performFor ?? ["all"]).includes(env.name) ||
-            (e.performFor ?? ["all"]).includes("all"),
-        );
-
-        for (const a of pkgActions) {
-          await runProcess(name, path, [a.run], true);
-        }
-
         const cmd = deduceCmd(env, options.custom);
+
         let npmArgs = options.npmArgs ?? [];
         let denoArgs = options.denoArgs ?? [];
+
         let { failures, successes } = await Promise.resolve(
           runonpkgs(
             env.name,
-            path,
+            `${path}${pwd == '.' ? '' : `${SEPARATOR}${pwd}`}`,
             name,
             fails,
             [cmd, "publish"].concat(
@@ -116,9 +120,6 @@ async function publishCommand(
         passes = successes;
       });
     });
-  } else {
-    console.log("Publishing the main monorepo is not supported yet");
-  }
 }
 
 type Actions = RexPkgPubActions;

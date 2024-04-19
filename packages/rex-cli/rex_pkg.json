@@ -1,13 +1,11 @@
 {
   "$schema": "../../schemas/rex_pkg.json",
   "publish": {
+    "dir": "npm",
     "actions": [
       {
         "run": "deno task npm",
         "performFor": ["npm"]
-      },
-      {
-        "run": ""
       }
     ]
   }

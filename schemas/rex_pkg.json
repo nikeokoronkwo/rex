@@ -12,6 +12,11 @@
       "type": "object",
       "description": "Whether to publish the given package (defaults to true)",
       "properties": {
+        "dir": {
+          "type": "string",
+          "default": ".",
+          "description": "The directory to publish the given package from. Defaults to the current directory of the rex.json file"
+        },
         "actions": {
           "type": "array",
           "description": "Actions to run before publishing the given packages",
