@@ -3,6 +3,8 @@ import { build, emptyDir } from "https://deno.land/x/dnt@0.40.0/mod.ts";
 
 await emptyDir("./npm");
 
+// TODO: Get Version
+
 await build({
   entryPoints: ["./main.ts"],
   outDir: "./npm",
@@ -16,11 +18,18 @@ await build({
     return true;
   },
   importMap: "../../.rexmap.json",
+  mappings: {
+    "../rex/mod.ts": {
+      name: "@rex-js/rex",
+      version: "^0.0.1",
+      peerDependency: true,
+    },
+  },
   scriptModule: false,
   package: {
     // package.json properties
-    name: "@prouesse/rex-cli",
-    version: "0.0.1-pre",
+    name: "@rex-js/rex-cli",
+    version: "0.0.1",
     description:
       "The Rex Monorepo CLI Tool, used for building the greatest in JS!",
     license: "MIT",
@@ -43,5 +52,9 @@ await build({
     Deno.copyFileSync("LICENSE", "npm/LICENSE");
     Deno.copyFileSync("README.md", "npm/README.md");
     Deno.copyFileSync("../../CHANGELOG.md", "npm/CHANGELOG.md");
+    Deno.createSync("npm/.gitignore").writeSync(
+      new TextEncoder().encode(`node_modules/`),
+    );
+    Deno.writeTextFileSync("npm/.npmignore", "\nnode_modules/", { append: true });
   },
 });
